@@ -32,10 +32,9 @@ console.log(gotLock)
 const simulate = async () => {
   const instance = await createInstance()
   setInstance(instance)
-  // simula 5 workers concorrendo ao mesmo tempo
-  console.log('agora vai')
-  await releaseLock('my-task-lock', '123') 
-  console.log('Limpo')
+  // 5 workers concorrendo ao mesmo tempo
+  await releaseLock(key) 
+  console.log('clear lock')
   const workers = Array.from({ length: 5 }, (_, i) => `worker-${i + 1}`)
   await Promise.all(workers.map(name => worker(name)))
 }
